@@ -1,0 +1,103 @@
+WriteStationReport <- function(wq_report_data,station,analytes_to_plot=NULL,guidelines_to_show,report_year,ht_notes=""){
+  #' @title write_station_report
+  #' @description function to generate full report for a station
+  #' @param wq_report_data wq_report_data from function ReadWaterData or ReadWaterDataGuidelines
+  #' @param station Stations
+  #' @param analytes_to_plot list of analytes to show. Can be NULL. If NULL all analytes in wq_report_data will be used
+  #' @param guidelines_to_show guidelines to include
+  #' @param report_year Year for which report is being generated
+  #' @param ht_notes Notes to include as footnotesin the table - e.g information about detection limit etc.
+  #' @return a list including
+  #' pl a facet plot containing results for all analytes
+  #' single_plots single plots for each analyte
+  #' group_plots facet plots for each group of analytes. Grouped by unit if no other default group is provided
+  #' group_plot_factors Number of distinct analytes (and hence facets) in the group_plots
+  #' hux_table formatted huxtable object displaying and summarising the station data.
+  #' @export
+  #' @importFrom dplyr filter summarise group_by
+  #' @importFrom ggpubr ggarrange
+  station_report_list <- NULL
+  station_text <- ""
+
+  if (is.null(analytes_to_plot)){
+    analytes_to_plot <- unlist(unique(wq_report_data$Analyte))
+  }
+  station_wq_report <- wq_report_data %>% filter(Location == station & Analyte %in% unlist(analytes_to_plot))
+
+
+
+  ##### plot figure ####
+  plot_data <- FilterPlotData(station_wq_report, analytes_to_plot,station)
+  plot_data <- AddFlagsToPlotData(plot_data)
+
+  if (!'analyte_group' %in% names(plot_data)){
+    group_type='units'
+    plot_data['group_type'] <- 'units'
+    unique_units <- unlist(unique(plot_data$Unit))
+    plot_data['analyte_group'] <- 0
+    for (i in 1:length(unique_units)){
+      if (is.na(unique_units[i])|unique_units[i]==""){
+        unit=""
+        plot_data[((plot_data$Unit==unit) & (!is.na(plot_data$Unit))),'analyte_group']="noUnit"
+      }else{
+      unit=unique_units[i]
+      plot_data[((plot_data$Unit==unit) & (!is.na(plot_data$Unit))),'analyte_group']=unit
+      }
+
+
+    }
+  } else {group_type='other'}
+
+
+  group_plots <- CreatePlotPerAnalyteGroup(plot_data,guidelines_to_show)
+  for (nm in names(group_plots)){
+
+        for (i in 1:length(group_plots[[nm]])){
+      station_report_list[['group_plots']][[nm]][[i]] <- list()
+      station_report_list[['group_plots']][[nm]][[i]][['plot']] <- group_plots[[nm]][[i]][['plot']]
+      station_report_list[['group_plots']][[nm]][[i]][['plotSize']] <- group_plots[[nm]][[i]][['plotSize']]
+
+      if(group_type=='units'){
+        if (nm !="noUnit"){
+        capt <- sprintf("Analytical results for analytes with units %s for station %s",nm,station)} else {
+            capt <- sprintf("Analytical results for dimensionless (without units) analytes for station %s",station)
+          }
+      } else {
+        capt <- sprintf("Analytical results for %s for station %s",nm,station)
+      }
+
+      if(i>1){
+        capt <-paste0(capt,", continued.")
+      }
+
+      station_report_list[['group_plots']][[nm]][[i]]['caption'] <- capt
+      fig_ref <- gsub("%","perc",paste0(station,'figure',nm,'plot',i),fixed=TRUE)
+      station_report_list[['group_plots']][[nm]][[i]]['figure_ref'] <-gsub("[[:punct:]]","",fig_ref)
+    }
+
+  }
+  station_report_list[['group_plot_factors']]<- plot_data %>% group_by(analyte_group) %>% summarise(gp_length=n_distinct(Analyte))
+
+  ##create tables
+  station_table <- CreateWideStationTable(station_wq_report,station,analytes_to_plot,guidelines_to_show,report_year)
+  ht_for_word<- CreateHtForWord(station_wq_report,station,analytes_to_plot,guidelines_to_show,report_year,ht_notes)
+
+  station_report_list[['hux_tables']] <-ht_for_word
+  #### record plain table ####
+  station_report_list[['tables']]<- station_table
+
+
+  tab_ref <- gsub("%","perc",paste0(station,'table'),fixed=TRUE)
+  station_report_list[['table_refs']] <- gsub("[[:punct:]]","",tab_ref)
+
+  #### write report text ####
+  ###create report text
+  analytes_text <- WriteAnalyteText(station_wq_report,station,analytes_to_plot,guidelines_to_show,
+                                      report_year)
+
+  station_text <- paste0(station_text,analytes_text)
+
+  station_report_list[['station_text']] <- station_text
+
+  return(station_report_list)
+}

@@ -1,0 +1,75 @@
+WriteAnalyteText <- function(station_wq_report,station,analytes_to_plot,guidelines_to_show=NULL,report_year=2017){
+  #' @title write_analyte_text
+  #' @description function to write the description for each analyte within the station data using a template stating an average if calcuated and the number of exceedances in a year.
+  #' @param station_wq_report water quality data for station
+  #' @param station station for which report is being generated
+  #' @param report_year  Year for which report is being generated
+  #' @return a character string describing the results for each analyte at a station
+  #' @export
+  #' @importFrom dplyr distinct filter group_by full_join summarise
+  #' @importFrom pander pandoc.list.return
+  #guideline screening for each station
+
+  exceedances <-       FilteringGuidelineExceedances(station_wq_report,station,guidelines_to_show,analytes_to_plot)
+  measurements_yearly_summary <- summarise_yearly_exceedances(station_wq_report,station,guidelines_to_show,analytes_to_plot)
+  exceedances_monthly_summary <- exceedances %>% group_by(Analyte,Guideline,month) %>%
+    summarise(Exceendances=n())
+  summary_stats <- DescriptiveStats(station_wq_report,analytes_to_plot)
+  input <- full_join(measurements_yearly_summary,summary_stats, by=c('Location','Analyte','year')) %>%
+    filter(year==report_year) ##provides exceedances per analytes
+
+  if(!is.null(guidelines_to_show)){
+    template_no_exceedance <- '#### %s\n
+    %s averaged %s %s in %s and did not exceed any specified guidelines or permit limits.\n\n' } else {
+
+  template_no_exceedance <- '#### %s\n %s averaged %s %s in %s. No guidelines or permit limits were specified for this analyte.'
+  }
+
+  template_exceedance <- '#### %s\n
+  %s averaged  %s %s and exceeded the guidelines or permit limits in %s out of %s measurements.\n\n'
+
+  template_no_mean <- '#### %s\n
+  No average value was calculated for %s as the percentage of non-detects exceeded 50%%.'
+
+  text_output <- ""
+  for (i in seq(nrow(input))){
+    row=input[i,]
+    if (row$exceedances>0 & (!is.na(row$exceedances))){ #if exceedances occured for analyte
+
+      if(!is.na(row$mean)){ #if mean was calculated
+        template <- template_exceedance
+        mean= formatC(row$mean,digits=2,format="fg",drop0trailing = TRUE)
+        part_1 <- paste0(sprintf(template,row$Analyte,row$Analyte,mean,row$Unit,row$exceedances,row$measurements))
+      } else {
+        text_no_mean_exceedance <- sprintf('However, the guidelines or permit limits were exceeded in %s out of %s measurements.\n',row$exceedances,row$measurements)
+        part_1 <- paste0(sprintf(template_no_mean,row$Analyte,row$Analyte),text_no_mean_exceedance)}
+
+      text_output <-  paste0(text_output,part_1,"\n\n")
+      exceededGuidelines=exceedances_monthly_summary %>% ungroup() %>% filter(Analyte==row$Analyte) %>%
+        mutate(Guideline = as.character(Guideline)) %>% select(Guideline) %>% distinct()
+      for (gl in unlist(exceededGuidelines)){
+
+        gl <- as.character(gl)
+        gl_exceedance_text <- sprintf('\nThe %s was exceeded in:\n',gl)
+        month_exceed  <- exceedances_monthly_summary %>% filter(Analyte==row$Analyte & Guideline==gl)
+        month_exceed <- month_exceed['month'] %>% distinct()
+        month_exceed <- factor(unlist(month_exceed),levels=month.name) %>% sort()
+        months_list <-  pandoc.list.return(month_exceed, style = "ordered",loose=TRUE)
+        text_output <- paste0(text_output,gl_exceedance_text,"\n\n",months_list,"\n\n\n")
+      }
+
+    } else { #if no exceedances for analytes
+
+      if (!is.na(row$mean)){#if mean was calculated
+        mean= formatC(row$mean,digits=2,format="fg",drop0trailing = TRUE)
+        template <- paste0(sprintf(template_no_exceedance,row$Analyte,row$Analyte, mean, row$Unit, row$year),"")
+        text_output<- paste0(text_output,template)
+      } else { #if mean was not calculated
+        template_no_mean_no_exceedance <- sprintf('Concentrations of %s did not exceed the permits limits in %s.\n\n',row$Analyte,report_year)
+        template <- paste0(sprintf(template_no_mean,row$Analyte,row$Analyte),template_no_mean_no_exceedance)
+        text_output<- paste0(text_output,template)
+      }
+    }
+    }
+  return(text_output)
+}

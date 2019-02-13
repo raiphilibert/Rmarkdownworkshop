@@ -1,0 +1,44 @@
+```{r {{chunkLabelTab}},eval=TRUE,echo=FALSE,warning=FALSE,message=FALSE,results="asis",fig.cap=table_cap,eval.after=TRUE,fig.align='left'}
+
+
+st=as.character("{{station}}")
+
+cat("\n") 
+cat("\\blandscape")
+cat("\n")
+station_table <- (results_list[["{{station_type}}"]]$hux_tables[["{{station}}"]])
+if (!is.null(station_table)){
+ # SaveHtforWord(station_table,st)
+  #SaveHtForExcel(station_table,st)
+  cat("\n")
+  cat("\n")
+  
+  cat("\n")
+  if(('word_document' %in% output_format)|('docx' %in% output_format)){
+    cat("\n")
+    cat('####### ')
+    cat("\n")
+    cat("\n")
+    table_cap <- cat(table_nums(name = "{{chunkLabelTab}}", caption = sprintf("Analytical results for station %s.",st)))
+    cat('\n')
+    
+    station_table_ft <- as_flextable(station_table)
+    tab_width = (9.105/ncol(station_table))
+    station_table_ft <- flextable::width(x=station_table_ft,width=tab_width)
+    station_table_ft
+    
+  } else {
+    table_cap <- sprintf("Analytical results for station %s.",st)
+    station_table_ft <- ((station_table)) %>%
+                        set_all_borders(1) %>%
+                        set_position('left') %>%
+                        set_width(0.6) %>%
+                        set_wrap(1,everywhere,TRUE) %>% set_caption(table_cap) %>% set_label(paste0('tab:',"{{chunkLabelTab}}")) %>%set_font_size(7)
+    station_table_ft
+    }
+   
+
+}
+cat("\n")
+cat('\\elandscape')
+```

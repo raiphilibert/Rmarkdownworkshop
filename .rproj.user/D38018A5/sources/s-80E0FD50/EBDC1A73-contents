@@ -1,0 +1,79 @@
+CreatePlotPerAnalyteGroup <- function(plot_data,guidelines_to_show,
+                                          important_date="2017-01-01",
+                                          note="",start_date='Jan-01-2017',end_date='Dec-31-2017'){
+
+  #' @title CreatePlotPerAnalyteGroup
+  #' @description Creates plots for each analyte group (either grouped by units or by manual groupings)
+  #' @param plot_data with columns Analyte, DateTime (Datetime must be POSIXct (format = "%b-%d-%Y")),plot_sym, year, Value, Guideline, minGuideline, maxGuideline,
+  #' @param guidelines_to_show guidelines to be included on plots (guidelines_to_show can be NULL)
+  #' @param important_date date to be highlighted on plot if necessary. Default value 1817-01-01 so that line does not show up.
+  #' @param note  footnotes for the plot
+  #' @param start_date start date for plot
+  #' @param end_date end date for plot
+  #' @return facet plot for all analytes, important date (e.g start of mining operations) is shown as a vertical line.
+  #' @export
+  #' @importFrom dplyr filter
+  #' @importFrom ggpubr ggarrange
+  #' @importFrom RColorBrewer brewer.pal
+
+  plot_data$Guideline <- factor(plot_data$Guideline,levels=guidelines_to_show)
+  guideline_guides <- plot_data %>%
+    filter(Guideline %in% guidelines_to_show) %>%  ungroup() %>%
+    select(Guideline,minGuideline,maxGuideline) %>%
+    gather(key="key",value="val",-Guideline) %>%
+    mutate(GuidelineName=Guideline,
+           GuidelineName=ifelse(key=='minGuideline',paste0(as.character(Guideline),' (min value)'),GuidelineName),
+           GuidelineName=ifelse(key=='maxGuideline',paste0(as.character(Guideline),' (max value)'),GuidelineName)) %>%
+    filter(!is.na(val)) %>%
+    select(-val) %>%
+    distinct()
+
+  nrow_gl <- nrow(guideline_guides)
+  if (nrow_gl > 0){
+    guideline_guides <- guideline_guides %>% mutate(ncolor=max(c(nrow_gl,3))) %>%
+      mutate(linetype=c(1:nrow_gl),color=brewer.pal(unique(ncolor),"Dark2")[c(1:nrow_gl)])##allowing brewer.pal to make a minimum of three colors and then only selecting the number we need
+  }
+
+
+  group_plots <- NULL
+  for (gp in unlist(unique(plot_data$analyte_group))){
+
+    gp_plot_data <- plot_data %>%
+      filter(analyte_group == gp)
+
+    st <- unlist(unique(plot_data$Location))
+
+    if(length(st) >1){
+      st <- 'More than 1 location'
+    }
+    st <- as.character(st)
+
+    title=paste(st,gp)
+    gp_analytes_plot <- CreatePlotPerAnalyte(gp_plot_data,guidelines_to_show,start_date,end_date,
+                                             important_date,guideline_guides=guideline_guides)
+
+
+
+    combined_group_plots <- NULL
+    unique_analytes <- unique(gp_plot_data$Analyte)
+    n_analyte <- length(unlist(unique(gp_plot_data$Analyte)))
+    for (i in 1:ceiling(n_analyte/9)){
+      indFirstAnalyte <- 1+((i-1)*9)
+      indLastAnalyte <-  ifelse(9+((i-1)*9)<=n_analyte,9+((i-1)*9),n_analyte)
+      indAnalyte <- indFirstAnalyte:indLastAnalyte
+      combined_group_plots[[i]] <- list()
+      combined_group_plots[[i]][['plot']] <- ggarrange(plotlist=gp_analytes_plot[indAnalyte],common.legend = TRUE,legend='bottom')
+      combined_group_plots[[i]][['plotSize']] <- ifelse(length(indAnalyte)>6,'fullpage','halfpage')
+      }
+
+
+
+
+
+      for (i in 1:length(combined_group_plots)){
+      group_plots[[as.character(gp)]][[i]] <- combined_group_plots[[i]]
+
+      }
+  }
+  return(group_plots)
+}

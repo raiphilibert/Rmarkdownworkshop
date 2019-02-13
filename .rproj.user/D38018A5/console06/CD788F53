@@ -303,4 +303,106 @@ C:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkd
 hop.git[0K[?25h[?25l[1AC:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>git commit -m "commit workshop files"[0K
 [0K[1A[135G[?25h[?25lC:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>git add .[0K
 [0K[1A[107G[?25h]0;  - git  add .[?25l
-[?25h
+[?25hwarning: LF will be replaced by CRLF in .rproj.user/D38018A5/sources/prop/E5063FFC.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .rproj.user/D38018A5/sources/prop/INDEX.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .rproj.user/D38018A5/sources/s-80E0FD50/5ADDAED4.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .rproj.user/shared/notebooks/paths.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .rproj.user/D38018A5/sources/prop/2DA39BED.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .rproj.user/D38018A5/sources/s-80E0FD50/18B6951.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .rproj.user/D38018A5/sources/s-80E0FD50/18B6951-contents.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25h]0; [?25l
+C:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>[0K[?25hg[0Ki[0Kt[0K[102G[?25lC:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>git c[0K[?25ho[0Km[0Km[0Ki[0Kt[0K[109G[?25lC:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>git commit -[0K[?25hm[0K[112G[?25lC:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>git commit -m "[0K[?25hu[0Kp[0Kd[0Ka[0Kt[0Ke[0Kd[0K[121G[?25lC:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>git commit -m "updated r[0K[?25he[0Ka[0Kd[0Km[0Ke[0K.[0Km[0Kd[0K"[0K[?25l
+[0K[?25h]0;  - git  commit -m "updated readme.md"]0; [master a6b95c7] updated readme.md[0K[?25l
+ 10 files changed, 302 insertions(+), 5 deletions(-)[0K
+ create mode 100644 .rproj.user/D38018A5/sources/prop/2DA39BED[0K
+ create mode 100644 .rproj.user/D38018A5/sources/s-80E0FD50/18B6951[0K
+ create mode 100644 .rproj.user/D38018A5/sources/s-80E0FD50/18B6951-contents[0K
+ create mode 100644 README.md[0K
+ create mode 100644 presentation/images/poster.png[0K
+[0K
+C:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>[0K[?25hg[0Ki[0Kt[0K[102G[?25lC:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>git p[0K[?25hu[0Ks[0Kh[0K]0;  - git  push[?25l
+[0K[?25hCounting objects: 21, done.[0K[?25l
+Delta compression using up to 4 threads.[0K
+Compressing objects: 100% (20/20), done.[0K
+[0K[?25hWriting objects: 100% (21/21), 191.37 KiB | 12.76 MiB/s, done.[0K[?25l
+Total 21 (delta 8), reused 0 (delta 0)[0K
+[0K[?25hremote: Resolving deltas: 100% (8/8), completed with 7 local objects.[0K[?25l
+[0K[?25hTo https://github.com/raiphilibert/Rmarkdownworkshop.git[0K[?25l
+   bcdadf4..a6b95c7  master -> master[0K
+[0K[?25h]0; [?25l
+C:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>[0K[?25hg[0Ki[0Kt[0K[102G[?25lC:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>git a[0K[?25hd[0Kd[0Kd[0K[?25lC:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>git add[0K[?25h[106G[?25lC:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>git add .[0K[?25h]0;  - git  add .[?25l
+[0K[?25hwarning: LF will be replaced by CRLF in .rproj.user/D38018A5/sources/prop/1F911622.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .rproj.user/D38018A5/sources/prop/INDEX.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .rproj.user/D38018A5/sources/s-80E0FD50/ED296250-contents.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .rproj.user/shared/notebooks/paths.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25h]0; error: open("Raissa_reference_document.docx"): Permission denied[0K[?25l
+error: unable to index file Raissa_reference_document.docx[0K
+fatal: updating files failed[0K
+[0K
+C:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>[0K[?25hg[0Ki[0Kt[0K[102G[?25lC:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>git c[0K[?25ho[0Km[0Km[0Ki[0Kt[0K[109G[?25lC:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>git commit -[0K[?25hm[0K[112G[?25lC:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>git commit -m "[0K[?25hu[0Kp[0Kd[0Ka[0Kt[0Ke[0Kd[0K[121G[?25lC:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>git commit -m "updated t[0K[?25hh[0Ke[0K[125G[?25lC:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>git commit -m "updated the r[0K[?25he[0Kf[0Ke[0Kr[0Ke[0Kn[0Kc[0Ke[0K[135G[?25lC:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>git commit -m "updated the reference d[0K[?25ho[0Kc[0Ku[0Km[0Ke[0Kn[0Kt[0Ks[0K"[0K[?25l
+[0K[?25h]0;  - git  commit -m "updated the reference documents"[?25lOn branch master[0K[1G[?25h]0; [?25l
+Your branch is up to date with 'origin/master'.[0K
+[0K
+Changes not staged for commit:[0K
+        [0;31mmodified:   .rproj.user/D38018A5/console06/CD788F53[0m[0K
+        [0;31mmodified:   .rproj.user/D38018A5/sources/prop/1F911622[0m[0K
+        [0;31mmodified:   .rproj.user/D38018A5/sources/prop/INDEX[0m[0K
+        [0;31mdeleted:    .rproj.user/D38018A5/sources/s-80E0FD50/ED296250[0m[0K
+        [0;31mmodified:   .rproj.user/D38018A5/sources/s-80E0FD50/ED296250-contents[0m[0K
+        [0;31mmodified:   .rproj.user/shared/notebooks/paths[0m[0K
+        [0;31mmodified:   Raissa_reference document.Rmd[0m[0K
+        [0;31mmodified:   Raissa_reference_document.docx[0m[0K
+        [0;31mmodified:   Raissa_reference_document.html[0m[0K
+        [0;31mmodified:   table_text.Rmd[0m[0K
+[0K
+Untracked files:[0K
+        [0;31m.rproj.user/D38018A5/sources/prop/14578A44[0m[0K
+        [0;31m.rproj.user/D38018A5/sources/prop/3C4591D4[0m[0K
+        [0;31m.rproj.user/D38018A5/sources/prop/6098FCD4[0m[0K
+        [0;31m.rproj.user/D38018A5/sources/prop/75799E4C[0m[0K
+        [0;31m.rproj.user/D38018A5/sources/prop/A9C29532[0m[0K
+        [0;31m.rproj.user/D38018A5/sources/prop/C3F2E257[0m[0K
+        [0;31m.rproj.user/D38018A5/sources/prop/FB63B54E[0m[0K
+        [0;31m.rproj.user/D38018A5/sources/s-80E0FD50/13D44B18[0m[0K
+        [0;31m.rproj.user/D38018A5/sources/s-80E0FD50/13D44B18-contents[0m[0K
+        [0;31m.rproj.user/D38018A5/sources/s-80E0FD50/1628438C[0m[0K
+        [0;31m.rproj.user/D38018A5/sources/s-80E0FD50/1628438C-contents[0m[0K
+        [0;31m.rproj.user/D38018A5/sources/s-80E0FD50/47F30D8B[0m[0K
+        [0;31m.rproj.user/D38018A5/sources/s-80E0FD50/47F30D8B-contents[0m[0K
+        [0;31m.rproj.user/D38018A5/sources/s-80E0FD50/4B0A108B-contents[0m[0K
+        [0;31m.rproj.user/D38018A5/sources/s-80E0FD50/4EECFA33[0m[0K
+        [0;31m.rproj.user/D38018A5/sources/s-80E0FD50/4EECFA33-contents[0m[0K
+        [0;31m.rproj.user/D38018A5/sources/s-80E0FD50/8C1057E5[0m[0K
+        [0;31m.rproj.user/D38018A5/sources/s-80E0FD50/8C1057E5-contents[0m[0K
+        [0;31m.rproj.user/D38018A5/sources/s-80E0FD50/EBDC1A73-contents[0m[0K
+        [0;31m.rproj.user/shared/notebooks/42040AFF-table_text/[0m[0K
+        [0;31m.rproj.user/shared/notebooks/EA2BCBCC-Raissa_reference document/[0m[0K
+        [0;31mbibliography.bib[0m[0K
+[0K
+no changes added to commit[0K
+[0K
+C:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>[0K[?25hgit commit -m "updated the reference documents"[0K[?25lC:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>git add .[0K[?25h[?25lC:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>git push[0K[?25h[?25lC:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>git add .[0K[?25h]0;  - git  add .[?25l
+[0K[?25hwarning: LF will be replaced by CRLF in .rproj.user/D38018A5/sources/prop/1F911622.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .rproj.user/D38018A5/sources/prop/INDEX.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .rproj.user/D38018A5/sources/s-80E0FD50/ED296250-contents.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .rproj.user/shared/notebooks/paths.[0K
+The file will have its original line endings in your working directory.[0K
+error: open("Raissa_reference_document.docx"): Permission denied[0K
+error: unable to index file Raissa_reference_document.docx[0K
+fatal: updating files failed[0K
+[0K[?25h]0; [?25l
+C:\Users\rphilibert\OneDrive - Hatfield Consultants\Documents\raissa_docs\Rmarkdownworkshop13Feb>[0K[?25hgit add .[0K

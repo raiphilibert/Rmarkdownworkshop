@@ -1,16 +1,17 @@
 ---
 title: "Raissa's reference document"
 output: 
-  html_document: default
+  bookdown::word_document2: default
   pdf_document: 
    fig_caption: yes 
    keep_tex: yes
    toc: yes
-  bookdown::word_document2: default
+  html_document: default
   word_document: default
 params:
   country1: 'Mauritius'
   country2: 'Canada'
+bibliography: bibliography.bib
 ---
 
 ```{r setup, include=FALSE, message = FALSE}
@@ -105,3 +106,27 @@ You can put some text here before the tables
 
 
 `r paste(knit(text = out), collapse = '\n\n')`
+
+## Referring to figures and tables
+
+If we want to refer to a figure or a table:
+  * if we are using bookdown formats (e.g bookdown::pdf_document2 or bookdown::word_document2) we can use "\\@ref()" and the chunk name.
+  * E.g here we will say Figure \@ref(fig:plot) to refer to the figure in the code chunk named plot. (easier to have 1 plot per code chunk)
+  * to refer to the table for our first country we can use: Table  \@ref(tab:`r params$country1`)
+  * we can also add "caption="\\\\label{tab:tab2}" to the the caption and use "\\label{...}" if we are exporting to pdf_document
+
+## Citing documents
+
+To have a bibliography, you can use a .bib file (you can export those from a number of reference managers such as JabRef and Mendeley). Here I have created a bibliography which includes the knitr package and the huxtable package. I can refer to them using the labels for them.
+
+For example: The knitr package [@R-knitr] is the basis of R markdown.
+
+## Sources:
+
+Some good helpful links for learning RMarkdown
+
+  * https://rmarkdown.rstudio.com/lesson-1.html
+  * https://r4ds.had.co.nz/r-markdown.html
+  * https://bookdown.org/yihui/bookdown/
+
+## Bibliography

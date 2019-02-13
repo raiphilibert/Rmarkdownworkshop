@@ -1,0 +1,375 @@
+---
+title: "Demo report"
+csl: council-of-science-editors-author-date.csl
+header-includes:
+- \usepackage{pdflscape}
+- \newcommand{\blandscape}{\begin{landscape}}
+- \newcommand{\elandscape}{\end{landscape}}
+output:
+  bookdown::word_document2:
+    fig_caption: yes
+    keep_md: yes
+    reference_docx: reference_style_file.docx
+    toc: yes
+    toc_depth: 2
+  bookdown::pdf_document2:
+    keep_tex: yes
+    number_sections: yes
+    toc: yes
+    toc_depth: 2
+lof: yes
+lot: yes
+keep_tex: yes
+params:
+  analytes_to_plot: null
+  end_date: Dec-31-2017
+  start_date: Jan-01-2017
+  guidelines_to_show: !r as.vector(c("JDS_WTF_MAXGRAB","BC_AWQG_STMAX"))
+  important_date: '2017-05-01'
+  username: Silvertip
+  password: HCLjhi20
+  referenceDateRange: 7
+  referenceStations: null
+  report_year: 2017
+  reporting_units: null
+  user: /
+  gwStationsGrouping: null  
+  gwImportantDate: null
+  gwImportantDateLabel: null
+  gwWells: null #lists of wells Location
+  start_date_hydro: null
+  end_date_hydro: null
+  hydro_historic_date: null
+bibliography: bibliography.bib
+toc: yes
+toc_depth: 2
+---
+
+```{r setup, include=FALSE, message=FALSE}
+report_year = params$report_year
+start_date = params$start_date
+end_date = params$end_date
+important_date = params$important_date
+username = params$username
+password = params$password
+user = params$user
+guidelines_to_show = params$guidelines_to_show
+analytes_to_plot = params$analytes_to_plot
+referenceStations = params$referenceStations
+reporting_units = params$reporting_units
+referenceDateRange = params$referenceDateRange
+monitoringReferenceList= data.frame(`Program Component`=c("Water Monitoring"),Reference=c("\\@BcMOE2016")) #testlist for references of monitoring
+##ht_notes
+ht_notes=""
+ 
+options(warn=-1) 
+
+####load libraries####
+library(knitr)
+library(pander)
+library(tidyverse)
+library(captioner)
+library(flextable)
+library(ggpubr)
+library(huxtable)
+library(EnvirodataReporting)
+library(scales)
+library(wrdr)
+library(httr)
+table_nums <- captioner(prefix = "Table")
+fig_nums <- captioner(prefix = "Figure")
+####knitr setup####
+knitr::opts_chunk$set(echo = FALSE, message=FALSE)
+
+#so that we can choose different functions for word or pdf
+output_format <- knitr::opts_knit$get("rmarkdown.pandoc.to")
+
+#Hatfield approved colours, no transparency (200)
+hat_darkgreen   <- rgb(0,  113,97, 155, max = 255)
+hat_lightgreen  <- rgb(114,196,185,100, max = 255)
+hat_blue        <- rgb(47, 96, 175,175, max = 255)
+hat_orange      <- rgb(255,114,0,  255, max = 255)
+hat_lightorange <- rgb(255,168,97, 255, max = 255)
+hat_grey        <- rgb(149,161,170,255, max = 255)
+hat_yellow      <- rgb(255,255,20,100,  max = 255)
+
+
+wrd_url <- "http://api.www.envirodata.hatfieldgroup.com/"
+wrdr.authenticate_wrd(wrd_url,username,password)
+metadata_list <- GetMetadataFromApi(username,password,user)
+wrd_url <- metadata_list$wrd_url
+location_list_data=metadata_list$location_list_data
+if (is.null(analytes_to_plot)){
+guideline_list_data=metadata_list$guideline_list_data
+guideline_detail_data=metadata_list$guideline_detail_data
+guideline_analytes <- unlist(unique(guideline_list_data  %>%
+                            filter(Guideline %in% guidelines_to_show) %>%
+                            select(Analyte)))
+analytes_to_plot <- as.vector(guideline_analytes) #or defined analytes
+}
+
+
+
+##Here select all water locations
+### can select specific LocationType (e.g "Surface Water", "Ground Water","Process Water")
+water_location_list_with_coordinates <- location_list_data %>% 
+                                        filter(Latitude!="" & Longitude!="") %>%
+                                        filter(grepl("Water",LocationType))
+
+LocationTypes <- unlist(unique(water_location_list_with_coordinates$LocationType))
+
+
+```
+
+```{r load_wq_data,eval=TRUE,echo=FALSE,warning=FALSE,message=FALSE,include=FALSE}
+
+out <- NULL
+results_list <- NULL
+plot_num <- 0
+wq_report_data <- NULL
+guidelines_to_show=c("JDS_WTF_MAXGRAB","BC_AWQG_STMAX","CCME_FRESH")
+
+for(station_type in LocationTypes){
+  
+wq_report_data[[station_type]]  <- ReadWaterDataGuidelines(username,password,station_type=station_type,
+                                                 start_date=start_date,end_date=end_date,
+                                                 all_dates=FALSE,
+                                                 guidelines=guidelines_to_show,
+                                                 user="/",stations='all',
+                                            referenceStations=referenceStations,referenceDateRange=referenceDateRange,
+                                                 reporting_units=reporting_units,
+                                                 analytes_to_plot = analytes_to_plot)
+
+ wq_report_data[[station_type]] <- wq_report_data[[station_type]] %>% 
+                                      mutate(Guideline=ifelse(Analyte=="pH","JDS_WTF_MAXGRAB",Guideline),
+                                              minGuideline=ifelse(Analyte=="pH",6.5,minGuideline),
+                                              maxGuideline=ifelse(Analyte=="pH",9,maxGuideline))
+ 
+results_list[[station_type]] <- OutputReportParts(wq_report_data[[station_type]],guidelines_to_show,analytes_to_plot,report_year,ht_notes)
+  
+  results_list[[station_type]][['stations_list']] <-  StationInventory(wq_report_data[[station_type]],station_type,report_year,username,password,stations_list=NULL,user="/")
+}
+
+```
+
+```{r createMonitoringDescription,eval=TRUE,echo=FALSE,warning=FALSE,message=FALSE, results="asis",fig.width=10,fig.height=6,dpi=300}
+monitoringTabs = NULL
+
+for(station_type in LocationTypes){
+  chunkLabelTab = gsub("[[:punct:]]","",paste0(as.character(station_type),"MonitoringTab"))
+  chunkLabelTab = gsub(" ","",chunkLabelTab)
+  env=new.env()
+  monitoringTabs = c(monitoringTabs, knit_expand('child_rmd/monitoring_table_child.Rmd',envir=env))  
+      
+
+                      }
+
+
+
+```
+
+```{r createHydrologyReport, eval=TRUE,echo=FALSE,warning=FALSE,message=FALSE,results='asis',fig.width=10,fig.height=6,dpi=300}
+
+aquariusLocationList <- wrdr.get_aquarius_location_list(wrd_url)
+stationsList <- aquariusLocationList %>% filter(LocationType=='Hydrology Station')%>% select(LocationIdentifier) %>% unlist(use.names=FALSE)
+
+start_date_hydro = ifelse(is.null(params$start_date_hydro),paste0("Nov-01-",report_year-1),params$start_date_hydro)
+end_date_hydro = ifelse(is.null(params$start_date_hydro),paste0("Oct-31-",report_year),params$start_date_hydro)
+max_date = ifelse(is.null(params$hydro_historic_date),paste0("Oct-31-",report_year),params$hydro_historic_date)
+hydroPlots <- PlotHydroFlowsAllStations(username,password,stationsList,max_date,start_date,end_date,report_year)
+
+out_hydro = NULL
+txt=sprintf("Flows monitored from %s to %s at surface water locations are shown in Figures %s to %s. The range of historical flows prior to %s are also shown (assumed here to be representative of baseline conditions. Surveyed (i.e., manually measured) flows are shown when no continuous data were available, or when there was less than ±20 percent difference to the continuous flow time-series (surveyed flows
+outside of this range were assumed erroneous and are not displayed).\n\n",  format(as.Date(start_date_hydro,format="%b-%d-%Y"),format="%B %Y"), format(as.Date(end_date_hydro,format="%b-%d-%Y"),format="%B %Y"),  hydroPlots[[1]]['figure_ref'], hydroPlots[[length(hydroPlots)]]['figure_ref'],  format(as.Date(max_date,format="%b-%d-%Y"),format="%Y"))
+
+env=new.env()
+out_hydro = c(out_hydro, knit_expand(text=txt,envir=env))
+
+
+width=8
+height=6
+
+for (station in unlist(names(hydroPlots))){
+          chunkLabelFig = paste0(as.character(hydroPlots[[station]][['figure_refs']]))
+          chunkLabelFig = gsub("[[:punct:]]","",chunkLabelFig)
+          env=new.env()
+          out_hydro = c(out_hydro, knit_expand("child_rmd/hydro_plot_child.Rmd",envir=env))
+}
+
+```
+
+```{r createGroundWaterReport, eval=TRUE,echo=FALSE,warning=FALSE,message=FALSE,results='asis',fig.width=10,fig.height=6,dpi=300}
+
+wells <- params$gwWells
+if (is.null(wells)){
+wells <- water_location_list_with_coordinates <- location_list_data %>% 
+                                        filter(Latitude!="" & Longitude!="") %>%
+                                        filter(grepl("Ground",LocationType))}
+
+nWells <- length(unlist(unique(wells$Location)))
+
+gwStationsGrouping <- params$gwStationsGrouping
+gwImportantDate <- params$gwImportantDate
+gwImportantDateLabel <- params$gwImportantDateLabel
+start_date_gw = paste0("Nov-01-",report_year-1)
+end_date_gw = paste0("Oct-31-",report_year)
+gwStationsList <- wells$Location
+
+#groundwaterPlots <- PlotGroundWaterElevationAllStations(username,password,gwStationsList,start_date_gw,end_date_gw,gwStationsGrouping,gwImportantDate,gwImportantDateLabel)
+load('C:/Users/rphilibert/OneDrive - Hatfield Consultants/Documents/Envirodata/EnvirodataReporting/groundwaterplots.Rda')
+
+out_gw = NULL
+txt=sprintf("Groundwater monitoring was conducted at %s wells. Figures \\@ref(fig:%s) to \\@ref(fig:%s)  show the groundwater elevations at the monitored wells.",length(groundwaterPlots),groundwaterPlots[[1]]['figure_ref'],groundwaterPlots[[length(groundwaterPlots)]]['figure_ref'])
+
+  env=new.env()
+  out_gw = c(out_gw, knit_expand(text=txt,envir=env))
+
+  gwPlotsNames <- names(groundwaterPlots) 
+  width=8
+  height=6
+  for (gp in (gwPlotsNames)){
+
+          chunkLabelFig = paste0(as.character(groundwaterPlots[[gp]]$figure_ref))
+          chunkLabelFig = gsub("[[:punct:]]","",chunkLabelFig)
+          env=new.env()
+          out_gw = c(out_gw, knit_expand("child_rmd/gw_plot_child.Rmd",envir=env))  
+      }
+      
+     
+
+                  
+```
+
+```{r createWQReport,eval=TRUE,echo=FALSE,warning=FALSE,message=FALSE, results="asis",fig.width=10,fig.height=6,dpi=300}
+
+plot=NULL
+
+for(station_type in LocationTypes){
+  station_type_stations_list <- names(results_list[[station_type]][[1]])[names(results_list[[station_type]][[1]]) != "water_type_introduction"]
+  env=new.env()
+  out = c(out, knit_expand('child_rmd/station_type_child.Rmd',envir=env))
+ 
+  for (station in (station_type_stations_list)){
+
+      env=new.env()
+      out = c(out, knit_expand('child_rmd/station_child.Rmd',envir = env))
+      plots <- results_list[[station_type]][['group_plots']][[station]]
+##for groups
+      for (gp_name in names(plots)){
+        
+         for (j in 1:length(plots[[gp_name]])){
+          chunkLabelFig = plots[[gp_name]][[j]][['figure_ref']]
+          env=new.env()
+          plotSize <- plots[[gp_name]][[j]][['plotSize']]
+          if(plotSize=='fullpage'){
+          width=10
+          height=6 }else{
+            width=6
+          height=4
+          }
+          out = c(out, knit_expand("child_rmd/plot_child.Rmd",envir=env))  
+      }
+      }
+     
+      
+      chunkLabelTab = gsub("[[:punct:]]","",as.character(results_list[[station_type]]$table_refs[[station]]))
+      env=new.env()
+      out = c(out, knit_expand('child_rmd/table_child.Rmd',envir=env))  
+      
+
+                      }
+
+}
+
+
+```
+
+
+# Executive summary
+ 
+According to the @BcMOE2016, the executive summary should contain:
+ 
+ * a summary of permit or regulatory non-compliance and measures to address non-compliance
+ * a summary of parameters showing trends, that are close to guidelines or differ from background
+
+
+# Introduction
+
+This report is an automated report of water quality monitoring undertaken at the Endako mine in 2017 through the Envirodata system. Laboratory files were uploaded to Envirodata through a database. The data are stored within the Envirodata database. To generate this report, the data were accessed from Envirodata using an API and processed in R. This report provides:
+
+ * an average yearly concentration for each analyte 
+ * a time-series plot, which also highlights permit limits and any important date (such as the start of mining operations)
+ * a table with monthly results for key parameters, highlighting results below the detection limit and above specified guidelines.
+ * summary statistics for each station (minimum, maximum,mean,median, standard deviation, standard error, sample size, number of non-detects, percent of non_detects) 
+ 
+# Description of Mine Operations and Discharges
+This section should include an overview of the mine activities (see @BcMOE2016 for further details). The text for this section can be provided as an input. It will not require editing as long as the description of mine activities does not change.
+
+A table and a map of the sampling sites are to be provided. These can be produced automatically based on data extracted from the Envirodata database.
+
+# Chemical Reagents and Waste Storage
+This section is related to hazardous material stored on site. If the required information is stored in an excel spreadsheet, it can be imported into the report.
+
+# Incidents
+This section should describe any incidents resulting in the release of effluents into the environment. If the required information is stored in an excel spreadsheet, it can be imported into the report.
+
+# Monitoring 
+## Monitoring Program Description
+
+This section should include a table with:
+
+  * Sample site name
+  * sample site description + coordinates
+  * years the site has been sampled
+  * parameters measured/analysed (not included in this example)
+  * Sample collection method (not included in this example)
+  * deviation of sampling program from permit requirements (not included in this example) 
+
+The monitoring program includes monitoring of:\newline
+
+`r pandoc.list.return(LocationTypes, style = "ordered")`.
+
+
+
+A summary of the monitoring locations, and frequency, for each monitoring component is provided below.\newline
+
+`r paste(knit(text = monitoringTabs), collapse = '\n')`
+
+
+
+## Sampling methodology
+This section should include a description of all sampling methodologies.
+
+## Data Quality Assurance and Control (QA/QC)
+This section should describe the QA/QC measures used. Tables showing the Relative Percent Differences and all blanks will be produced from Envirodata.
+
+# Hydrological and flow monitoring results
+
+`r paste(knit(text = out_hydro), collapse = '\n')`
+
+# Ground Water monitoring
+
+`r paste(knit(text = out_gw), collapse = '\n')`
+
+
+# Water quality monitoring results
+
+The following sections present the results for:\newline
+
+`r pandoc.list.return(LocationTypes, style = "ordered")` 
+
+`r paste(knit(text = out), collapse = '\n')`
+
+# Conclusion
+
+This report was automatically generated based on the available data. The following content is to be included:
+
+ * the inclusion of continuous flow data
+ * the improvement of tables and figures formatting
+ * Inclusion of lists of figures and tables in the word output.
+ * Inclusion of guideline screening for dissolved Iron whereby two consecutive data points should not exceed a given threshold.
+
+
+
+ 
+# References
