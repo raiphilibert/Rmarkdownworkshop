@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1549940182686.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3088612887",
+    "id" : "71CC6471",
+    "lastKnownWriteTime" : 1550032806,
+    "last_content_update" : 1550032806434,
+    "path" : "~/Dropbox/Rladies/Rmarkdownworkshop13Feb/presentation/pres.Rmd",
+    "project_path" : "presentation/pres.Rmd",
+    "properties" : {
+        "cursorPosition" : "76,3",
+        "last_setup_crc32" : "3C4391A4c4e2d899",
+        "scrollLine" : "75",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,107 @@
+---
+title: "Raissa's reference document"
+output: 
+  html_document: default
+  pdf_document: 
+   fig_caption: yes 
+   keep_tex: yes
+   toc: yes
+  bookdown::word_document2: default
+  word_document: default
+params:
+  country1: 'Mauritius'
+  country2: 'Canada'
+---
+
+```{r setup, include=FALSE, message = FALSE}
+library(ggplot2)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Introduction
+
+My neighbour's name is Anna. She chose:
+
+ * Mauritius
+ * Canada
+ 
+ 1. Mauritius
+ 2. Canada
+
+
+```{r tableChunk, eval=TRUE, message = FALSE}
+library(gapminder)
+library(dplyr)
+
+df <- gapminder %>% filter(country %in% c('Poland','Canada')) 
+knitr::kable(df)
+```
+```{r table2}
+library(pander)
+pander::pander(df,caption='A table with pander')
+```
+
+
+## Tip from Raissa
+We are now going to make a table with the huxtable package. This is very helpful for conditional formatting specially when outputting to a word docume
+
+```{r tableChunkHux, echo=TRUE, eval=TRUE, message=FALSE}
+library(huxtable)
+library(flextable)
+dfHt <- huxtable(df,add_colnames = TRUE) 
+
+condition <- which(dfHt$year>1990)
+dfHt <- dfHt %>%  set_text_color(condition, everywhere,'blue') 
+
+dfHt <- dfHt %>% set_all_borders(everywhere,everywhere,1) %>% set_all_border_colors(everywhere,everywhere,'green')
+
+output_format <- knitr::opts_knit$get("rmarkdown.pandoc.to")
+  if(('word_document' %in% output_format)|('docx' %in% output_format)){
+huxtable::as_flextable(dfHt) } else {
+  dfHt
+}
+```
+
+
+
+## Plots
+
+We are now going to create a plot for our two countries
+
+```{r plot, echo=FALSE, fig.cap='Population of my two countries'}
+
+plotData <- gapminder %>% filter(country %in% c('Mauritius','Canada'))
+
+plotData %>% ggplot(aes(x=year,y=pop,color=country)) + geom_line()
+
+```
+
+
+## Using in-line code and parameter
+
+Remember how we include parameters in our YAML header. I can now ask RMarkdown to include those names here. RMarkdown will print the first parameter if I put the inline code as follows:
+
+  * `r params$country1`
+  * `r params$country2`
+  
+  
+## Using loops
+
+```{r, results='asis'}
+library(knitr)
+library(pander)
+out=NULL
+
+for(ct in c(params$country1,params$country2)){
+  env=new.env()
+  print(ct)
+  out = c(out,knit_expand('table_text.Rmd',envir=env))
+
+
+}
+```
+
+You can put some text here before the tables
+
+
+`r paste(knit(text = out), collapse = '\n\n')`

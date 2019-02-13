@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1550031926463.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "B90755B8",
+    "lastKnownWriteTime" : 1550032261,
+    "last_content_update" : 1550032261734,
+    "path" : "~/Dropbox/Rladies/Rmarkdownworkshop13Feb/loop/test.Rmd",
+    "project_path" : "loop/test.Rmd",
+    "properties" : {
+        "cursorPosition" : "1,32",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

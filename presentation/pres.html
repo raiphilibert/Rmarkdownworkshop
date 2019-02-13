@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>An Introduction to R-Markdown</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Raissa Philibert" />
+    <link href="pres_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="pres_files/remark-css-0.0.1/rladies.css" rel="stylesheet" />
+    <link href="pres_files/remark-css-0.0.1/rladies-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# An Introduction to R-Markdown
+## A workshop for R-Ladies Vancouver
+### Raissa Philibert
+### Feb 13, 2019
+
+---
+
+
+
+
+
+# What is R Markdown?
+
+- Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. 
+
+- RMarkdown is a file format (and R package) that integrates R and Markdown.
+
+![](images/rmarkdown_process.png)
+
+---
+# Why use RMarkdown?
+- Creates reproducible analyses
+  - RMarkdown document can be self-contained and easy to share
+  
+- Can output to multiple formats include word, pdf and html
+
+
+# Let's make our first RMarkdown document
+
+
+
+---
+# R Markdown Components
+
+- YAML Header
+
+```
+---
+title: "An Introduction to R-Markdown"
+author: "Raissa Philibert"
+date: "Feb 13, 2019"
+output:
+  xaringan::moon_reader:
+    css: ["default", "rladies", "rladies-fonts"]
+    nature:
+      highlightLines: true
+subtitle: A workshop for R-Ladies Vancouver
+---
+```
+
+---
+background-image: url(images/04_RLadiesVan-logo.jpg)
+background-size: 200px
+background-position: 100% 50%
+class: left, middle
+
+# Challenge #1
+
+ - Create an Rmarkdown document with each output format (word, pdf, html)
+ - Compare the YAML header
+ 
+---
+# Rmarkdown components - Code chunks 
+
+
+![](images/codeChunk.png)
+
+- Code chunk options
+![](images/codechunkoptions.png)
+
+---
+# Challenge #2
+
+- Make a code chunk and show the output
+- Make a code chunk and show both the code and output
+- Make a code chunk and show the code but not the the output
+  
+---
+# Rmarkdown compoments - plain text
+
+- Plain text just like this
+
+![centre](images/markdownsyntax.png)
+---
+background-image: url(images/04_RLadiesVan-logo.jpg)
+background-size: 200px
+background-position: 100% 50%
+class: left, middle
+
+# Challenge #3
+
+- Ask your neighbour for her name and two countries of her choice
+- Write a small note with your neighbour's name and put the two countries in:
+  - an ordered list
+  - a numbered list
+
+---
+# Tables
+
+- There are several packages to output tables
+
+- Some work better than others with different output formats
+
+- My preferred table package for RMarkdown is huxtable 
+  - https://hughjonesd.github.io/huxtable/ 
+
+---
+background-image: url(images/04_RLadiesVan-logo.jpg)
+background-size: 200px
+background-position: 100% 50%
+class: left, middle
+
+# Challenge #4
+- Print a table with the top 10 rows of gapminder data for a country of choice
+
+---
+# Challenge #5
+
+- Make a plot and print the plot
+
+---
+# Extras: plotting through loops
+
+- When using loops, Rmarkdown doesn't print the output
+
+- Using the function knit_expand comes in handy
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightLines": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

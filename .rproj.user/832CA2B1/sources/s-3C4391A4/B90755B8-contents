@@ -1,0 +1,23 @@
+---
+output: bookdown::word_document2
+# output: bookdown::pdf_document2
+---
+
+```{r, results='asis'}
+library(knitr)
+library(pander)
+out=NULL
+
+for(i in 1:2){
+  env=new.env()
+  out = c(out,knit_expand('table_text.Rmd',envir=env))
+
+
+}
+```
+
+You can put some text here before the tables
+
+
+`r paste(knit(text = out), collapse = '\n\n')`
+

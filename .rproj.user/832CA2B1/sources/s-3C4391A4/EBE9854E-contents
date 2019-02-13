@@ -1,0 +1,5 @@
+```{r "{{ct}}", results='asis',echo=FALSE}
+
+data <- gapminder %>% filter(country==ct,!is.na(pop)) %>% select(year,country,pop) %>% head(15)
+pander(data,booktabs=TRUE,caption=paste0("Table-","{{ct}}"))
+```

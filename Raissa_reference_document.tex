@@ -1,0 +1,1120 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Untitled},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Untitled}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{}
+    \preauthor{}\postauthor{}
+    \date{}
+    \predate{}\postdate{}
+  
+\usepackage{array}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage[table]{xcolor}
+\usepackage{multirow}
+\usepackage{hhline}
+\usepackage{calc}
+\usepackage{tabularx}
+\usepackage{threeparttable}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\hypertarget{introduction}{%
+\subsection{Introduction}\label{introduction}}
+
+My neighbour's name is Anna. She chose:
+
+\begin{itemize}
+\tightlist
+\item
+  Mauritius
+\item
+  Canada
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Mauritius
+\item
+  Canada
+\end{enumerate}
+
+\begin{longtable}[]{@{}llrrrr@{}}
+\toprule
+country & continent & year & lifeExp & pop & gdpPercap\tabularnewline
+\midrule
+\endhead
+Canada & Americas & 1952 & 68.750 & 14785584 & 11367.161\tabularnewline
+Canada & Americas & 1957 & 69.960 & 17010154 & 12489.950\tabularnewline
+Canada & Americas & 1962 & 71.300 & 18985849 & 13462.486\tabularnewline
+Canada & Americas & 1967 & 72.130 & 20819767 & 16076.588\tabularnewline
+Canada & Americas & 1972 & 72.880 & 22284500 & 18970.571\tabularnewline
+Canada & Americas & 1977 & 74.210 & 23796400 & 22090.883\tabularnewline
+Canada & Americas & 1982 & 75.760 & 25201900 & 22898.792\tabularnewline
+Canada & Americas & 1987 & 76.860 & 26549700 & 26626.515\tabularnewline
+Canada & Americas & 1992 & 77.950 & 28523502 & 26342.884\tabularnewline
+Canada & Americas & 1997 & 78.610 & 30305843 & 28954.926\tabularnewline
+Canada & Americas & 2002 & 79.770 & 31902268 & 33328.965\tabularnewline
+Canada & Americas & 2007 & 80.653 & 33390141 & 36319.235\tabularnewline
+Poland & Europe & 1952 & 61.310 & 25730551 & 4029.330\tabularnewline
+Poland & Europe & 1957 & 65.770 & 28235346 & 4734.253\tabularnewline
+Poland & Europe & 1962 & 67.640 & 30329617 & 5338.752\tabularnewline
+Poland & Europe & 1967 & 69.610 & 31785378 & 6557.153\tabularnewline
+Poland & Europe & 1972 & 70.850 & 33039545 & 8006.507\tabularnewline
+Poland & Europe & 1977 & 70.670 & 34621254 & 9508.141\tabularnewline
+Poland & Europe & 1982 & 71.320 & 36227381 & 8451.531\tabularnewline
+Poland & Europe & 1987 & 70.980 & 37740710 & 9082.351\tabularnewline
+Poland & Europe & 1992 & 70.990 & 38370697 & 7738.881\tabularnewline
+Poland & Europe & 1997 & 72.750 & 38654957 & 10159.584\tabularnewline
+Poland & Europe & 2002 & 74.670 & 38625976 & 12002.239\tabularnewline
+Poland & Europe & 2007 & 75.563 & 38518241 & 15389.925\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{longtable}[]{@{}cccccc@{}}
+\caption{A table with pander}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.12\columnwidth}\centering
+country\strut
+\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering
+continent\strut
+\end{minipage} & \begin{minipage}[b]{0.08\columnwidth}\centering
+year\strut
+\end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\centering
+lifeExp\strut
+\end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\centering
+pop\strut
+\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering
+gdpPercap\strut
+\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.12\columnwidth}\centering
+country\strut
+\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering
+continent\strut
+\end{minipage} & \begin{minipage}[b]{0.08\columnwidth}\centering
+year\strut
+\end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\centering
+lifeExp\strut
+\end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\centering
+pop\strut
+\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering
+gdpPercap\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Americas\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1952\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+68.75\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+14785584\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+11367\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Americas\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1957\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+69.96\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+17010154\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+12490\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Americas\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1962\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+71.3\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+18985849\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+13462\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Americas\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1967\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+72.13\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+20819767\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+16077\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Americas\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1972\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+72.88\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+22284500\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+18971\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Americas\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1977\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+74.21\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+23796400\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+22091\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Americas\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1982\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+75.76\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+25201900\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+22899\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Americas\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1987\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+76.86\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+26549700\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+26627\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Americas\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1992\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+77.95\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+28523502\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+26343\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Americas\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1997\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+78.61\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+30305843\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+28955\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Americas\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+2002\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+79.77\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+31902268\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+33329\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Americas\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+2007\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+80.65\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+33390141\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+36319\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Poland\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Europe\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1952\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+61.31\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+25730551\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+4029\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Poland\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Europe\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1957\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+65.77\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+28235346\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+4734\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Poland\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Europe\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1962\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+67.64\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+30329617\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+5339\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Poland\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Europe\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1967\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+69.61\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+31785378\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+6557\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Poland\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Europe\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1972\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+70.85\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+33039545\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+8007\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Poland\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Europe\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1977\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+70.67\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+34621254\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+9508\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Poland\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Europe\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1982\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+71.32\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+36227381\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+8452\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Poland\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Europe\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1987\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+70.98\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+37740710\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+9082\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Poland\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Europe\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1992\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+70.99\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+38370697\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+7739\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Poland\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Europe\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+1997\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+72.75\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+38654957\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+10160\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Poland\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Europe\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+2002\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+74.67\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+38625976\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+12002\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.12\columnwidth}\centering
+Poland\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+Europe\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering
+2007\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+75.56\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+38518241\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+15390\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{tip-from-raissa}{%
+\subsection{Tip from Raissa}\label{tip-from-raissa}}
+
+We are now going to make a table with the huxtable package. This is very
+helpful for conditional formatting specially when outputting to a word
+docume
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(huxtable)}
+\KeywordTok{library}\NormalTok{(flextable)}
+\NormalTok{dfHt <-}\StringTok{ }\KeywordTok{huxtable}\NormalTok{(df,}\DataTypeTok{add_colnames =} \OtherTok{TRUE}\NormalTok{) }
+
+\NormalTok{condition <-}\StringTok{ }\KeywordTok{which}\NormalTok{(dfHt}\OperatorTok{$}\NormalTok{year}\OperatorTok{>}\DecValTok{1990}\NormalTok{)}
+\NormalTok{dfHt <-}\StringTok{ }\NormalTok{dfHt }\OperatorTok{%>%}\StringTok{  }\KeywordTok{set_text_color}\NormalTok{(condition, everywhere,}\StringTok{'blue'}\NormalTok{) }
+
+\NormalTok{dfHt <-}\StringTok{ }\NormalTok{dfHt }\OperatorTok{%>%}\StringTok{ }\KeywordTok{set_all_borders}\NormalTok{(everywhere,everywhere,}\DecValTok{1}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{set_all_border_colors}\NormalTok{(everywhere,everywhere,}\StringTok{'green'}\NormalTok{)}
+
+\NormalTok{output_format <-}\StringTok{ }\NormalTok{knitr}\OperatorTok{::}\NormalTok{opts_knit}\OperatorTok{$}\KeywordTok{get}\NormalTok{(}\StringTok{"rmarkdown.pandoc.to"}\NormalTok{)}
+  \ControlFlowTok{if}\NormalTok{((}\StringTok{'word_document'} \OperatorTok{%in%}\StringTok{ }\NormalTok{output_format)}\OperatorTok{|}\NormalTok{(}\StringTok{'docx'} \OperatorTok{%in%}\StringTok{ }\NormalTok{output_format))\{}
+\NormalTok{huxtable}\OperatorTok{::}\KeywordTok{as_flextable}\NormalTok{(dfHt) \} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{  dfHt}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+ 
+  \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
+  \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{\baselineskip+#1}}
+  \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
+
+\begin{table}[h]
+\centering
+\begin{threeparttable}
+\begin{tabularx}{0.5\textwidth}{p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth}}
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright \textcolor[RGB]{0, 0, 255}{country}\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright \textcolor[RGB]{0, 0, 255}{continent}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{year}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{lifeExp}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{pop}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{gdpPercap}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Canada\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Americas\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1952\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 68.8\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 14785584\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1.14e+04\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Canada\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Americas\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1957\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 70~~\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 17010154\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1.25e+04\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Canada\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Americas\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1962\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 71.3\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 18985849\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1.35e+04\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Canada\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Americas\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1967\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 72.1\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 20819767\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1.61e+04\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Canada\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Americas\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1972\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 72.9\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 22284500\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1.9e+04~\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Canada\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Americas\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1977\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 74.2\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 23796400\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 2.21e+04\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Canada\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Americas\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1982\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 75.8\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 25201900\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 2.29e+04\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Canada\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Americas\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1987\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 76.9\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 26549700\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 2.66e+04\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright \textcolor[RGB]{0, 0, 255}{Canada}\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright \textcolor[RGB]{0, 0, 255}{Americas}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{1992}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{78~~}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{28523502}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{2.63e+04}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright \textcolor[RGB]{0, 0, 255}{Canada}\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright \textcolor[RGB]{0, 0, 255}{Americas}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{1997}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{78.6}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{30305843}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{2.9e+04~}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright \textcolor[RGB]{0, 0, 255}{Canada}\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright \textcolor[RGB]{0, 0, 255}{Americas}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{2002}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{79.8}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{31902268}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{3.33e+04}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright \textcolor[RGB]{0, 0, 255}{Canada}\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright \textcolor[RGB]{0, 0, 255}{Americas}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{2007}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{80.7}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{33390141}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{3.63e+04}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Poland\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Europe\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1952\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 61.3\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 25730551\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 4.03e+03\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Poland\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Europe\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1957\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 65.8\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 28235346\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 4.73e+03\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Poland\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Europe\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1962\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 67.6\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 30329617\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 5.34e+03\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Poland\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Europe\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1967\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 69.6\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 31785378\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 6.56e+03\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Poland\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Europe\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1972\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 70.8\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 33039545\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 8.01e+03\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Poland\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Europe\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1977\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 70.7\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 34621254\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 9.51e+03\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Poland\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Europe\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1982\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 71.3\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 36227381\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 8.45e+03\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Poland\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright Europe\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 1987\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 71~~\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 37740710\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft 9.08e+03\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright \textcolor[RGB]{0, 0, 255}{Poland}\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright \textcolor[RGB]{0, 0, 255}{Europe}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{1992}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{71~~}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{38370697}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{7.74e+03}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright \textcolor[RGB]{0, 0, 255}{Poland}\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright \textcolor[RGB]{0, 0, 255}{Europe}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{1997}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{72.8}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{38654957}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{1.02e+04}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright \textcolor[RGB]{0, 0, 255}{Poland}\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright \textcolor[RGB]{0, 0, 255}{Europe}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{2002}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{74.7}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{38625976}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{1.2e+04~}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 255, 0}{1}}l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright \textcolor[RGB]{0, 0, 255}{Poland}\huxbpad{4pt}} &
+\multicolumn{1}{l!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedright \textcolor[RGB]{0, 0, 255}{Europe}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{2007}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{75.6}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{38518241}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 255, 0}{1}}}{\huxtpad{4pt}\raggedleft \textcolor[RGB]{0, 0, 255}{1.54e+04}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}->{\huxb{0, 255, 0}{1}}-}
+\arrayrulecolor{black}
+\end{tabularx}\end{threeparttable}
+
+
+\end{table}
+ 
+
+\hypertarget{plots}{%
+\subsection{Plots}\label{plots}}
+
+We are now going to create a plot for our two countries
+
+\begin{figure}
+\centering
+\includegraphics{Raissa_reference_document_files/figure-latex/plot-1.pdf}
+\caption{Population of my two countries}
+\end{figure}
+
+\hypertarget{using-in-line-code-and-parameter}{%
+\subsection{Using in-line code and
+parameter}\label{using-in-line-code-and-parameter}}
+
+Remember how we include parameters in our YAML header. I can now ask
+RMarkdown to include those names here. RMarkdown will print the first
+parameter if I put the inline code as follows:
+
+\begin{itemize}
+\tightlist
+\item
+  Mauritius
+\item
+  Canada
+\end{itemize}
+
+\hypertarget{using-loops}{%
+\subsection{Using loops}\label{using-loops}}
+
+{[}1{]} ``Mauritius'' {[}1{]} ``Canada''
+
+You can put some text here before the tables
+
+\begin{longtable}[]{@{}ccc@{}}
+\caption{Table-Mauritius}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.09\columnwidth}\centering
+year\strut
+\end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\centering
+country\strut
+\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering
+pop\strut
+\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.09\columnwidth}\centering
+year\strut
+\end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\centering
+country\strut
+\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering
+pop\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1952\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+14785584\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1957\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+17010154\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1962\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+18985849\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1967\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+20819767\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1972\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+22284500\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1977\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+23796400\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1982\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+25201900\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1987\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+26549700\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1992\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+28523502\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1997\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+30305843\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+2002\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+31902268\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+2007\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+33390141\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{longtable}[]{@{}ccc@{}}
+\caption{Table-Canada}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.09\columnwidth}\centering
+year\strut
+\end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\centering
+country\strut
+\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering
+pop\strut
+\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.09\columnwidth}\centering
+year\strut
+\end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\centering
+country\strut
+\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering
+pop\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1952\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+14785584\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1957\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+17010154\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1962\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+18985849\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1967\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+20819767\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1972\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+22284500\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1977\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+23796400\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1982\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+25201900\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1987\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+26549700\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1992\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+28523502\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+1997\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+30305843\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+2002\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+31902268\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\centering
+2007\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+Canada\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+33390141\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+
+\end{document}

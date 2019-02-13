@@ -1,0 +1,132 @@
+---
+title: "An Introduction to R-Markdown"
+author: "Raissa Philibert"
+date: "Feb 13, 2019"
+output:
+  xaringan::moon_reader:
+    css: ["default", "rladies", "rladies-fonts"]
+    nature:
+      highlightLines: true
+subtitle: A workshop for R-Ladies Vancouver
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# What is R Markdown?
+
+- Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. 
+
+- RMarkdown is a file format (and R package) that integrates R and Markdown.
+
+![](images/rmarkdown_process.png)
+
+---
+# Why use RMarkdown?
+- Creates reproducible analyses
+  - RMarkdown document can be self-contained and easy to share
+  
+- Can output to multiple formats include word, pdf and html
+
+
+# Let's make our first RMarkdown document
+
+![centre](images/04_RLadiesVan-logo.jpg =400x)
+
+---
+# R Markdown Components
+
+- YAML Header
+
+```
+---
+title: "An Introduction to R-Markdown"
+author: "Raissa Philibert"
+date: "Feb 13, 2019"
+output:
+  xaringan::moon_reader:
+    css: ["default", "rladies", "rladies-fonts"]
+    nature:
+      highlightLines: true
+subtitle: A workshop for R-Ladies Vancouver
+---
+```
+
+---
+background-image: url(images/04_RLadiesVan-logo.jpg)
+background-size: 200px
+background-position: 100% 50%
+class: left, middle
+
+# Challenge #1
+
+ - Create an Rmarkdown document with each output format (word, pdf, html)
+ - Compare the YAML header
+ 
+---
+# Rmarkdown components - Code chunks 
+
+
+![](images/codeChunk.png)
+
+- Code chunk options
+![](images/codechunkoptions.png)
+
+---
+# Challenge #2
+
+- Make a code chunk and show the output
+- Make a code chunk and show both the code and output
+- Make a code chunk and show the code but not the the output
+  
+---
+# Rmarkdown compoments - plain text
+
+- Plain text just like this
+
+![centre](images/markdownsyntax.png)
+---
+background-image: url(images/04_RLadiesVan-logo.jpg)
+background-size: 200px
+background-position: 100% 50%
+class: left, middle
+
+# Challenge #3
+
+- Ask your neighbour for her name and two countries of her choice
+- Write a small notewith your neighbour's name and put the two countries in a
+  - an ordered list
+  - a numbered list
+
+---
+# Tables
+
+- There are several packages to output tables
+
+- Some work better than others with different output formats
+
+- My preferred table package for RMarkdown is huxtable 
+  - https://hughjonesd.github.io/huxtable/ 
+
+---
+background-image: url(images/04_RLadiesVan-logo.jpg)
+background-size: 200px
+background-position: 100% 50%
+class: left, middle
+
+# Challenge #4
+- Print a table with the top 10 rows of gapminder data for a country of choice
+
+---
+# Challenge #5
+
+- Make a plot and print the plot
+
+---
+# Extras: plotting through loops
+
+- When using loops, Rmarkdown doesn't print the output
+
+- Using the function knit_expand comes in handy

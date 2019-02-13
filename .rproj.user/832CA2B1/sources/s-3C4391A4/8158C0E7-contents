@@ -1,0 +1,58 @@
+CreateHtForWord <- function(station_wq_report,station,analytes_to_plot,guidelines_to_show,report_year,ht_notes=NULL){
+  #' @title CreateHtForWord
+  #' @description Creates a formatted table to be inserted in the report. The table shows station data for the reporting year and is formatted to highlight values below detection limits and outside of guidelines.
+  #' @param station_wq_report water quality report from the ReadWaterData or ReadWaterDataGuidelines functions
+  #' @param station Station(s) for which the table is being generated. If more than one station, list of stations should be in a vector format. e.g c('ED1','WQ9)
+  #' @param analytes_to_plot analytes to be included in the table
+  #' @param guidelines_to_show guidelines against which the data are compared. guidelines_to_show can be NULL
+  #' @param report_year Year for which the report is being generated
+  #' @param ht_notes Additional notes to be added as footnotes to the table
+  #' @return formatted huxtable object
+  #' @export
+  #' @importFrom huxtable colspan align
+  #'
+  #'
+
+  station_table <- CreateWideStationTable(station_wq_report,station,analytes_to_plot,guidelines_to_show,report_year)
+  station_table$Date=format(as.POSIXct(station_table$DateTime,format="%Y-%m-%d %H:%M:%S"),'%Y-%m-%d')
+  ht_for_word <- station_table %>% select(-one_of(c('week','year','month'))) %>% huxtable::huxtable(add_colnames = TRUE)
+  ### create merged row for summary statistics header
+  summary_name_row <- which(station_table[,1]=='Summary statistics') + 1 #because ht counts headers as a row
+  colspan(ht_for_word)[summary_name_row,1] <- ncol(ht_for_word)
+  align(ht_for_word)[summary_name_row,1] <- 'center'
+  bold(ht_for_word)[summary_name_row,1] <- TRUE
+  ht_for_word <- set_all_borders(ht_for_word,1)
+
+  distinct_station_data <- station_wq_report %>%
+    filter(Analyte %in% unlist(analytes_to_plot)) %>%
+    distinct()
+  distinct_station_data <- AddScreening(distinct_station_data)
+
+  #add color to ht
+  distinct_station_data <- distinct_station_data %>%
+    mutate(DateTime=format(DateTime,format='%Y-%m-%d %H:%M:%S'))   #making sure DateTime is in the same format in the long table and the wide table
+  row_id=c("Location","DateTime")
+  col_id="Analyte"
+  ht_for_word <- AddFormattingToWideHt(distinct_station_data,ht_for_word,row_id,col_id)
+
+  #finalise formatting
+  ht_for_word <- ht_for_word %>% set_bold(1,everywhere,TRUE) %>%
+    select(Location,Date,everything(),-DateTime)
+
+  ##add legend
+  lastRow= nrow(ht_for_word)
+  spaceRow=c(rep("",ncol(ht_for_word)))
+  ht_for_excel <- ht_for_word %>%
+    set_bottom_border(lastRow,everywhere,TRUE) %>%
+    insert_row(spaceRow,after=lastRow, copy_cell_props = FALSE) %>%
+    insert_row(c("Notes:",rep("",ncol(ht_for_word)-1)),after=lastRow+1, copy_cell_props = FALSE) %>%
+    set_bold(lastRow+2,everywhere,value=TRUE) %>% set_font_size(row=lastRow+2,everywhere,7)
+  ht_for_word <- AddFormatLegend(ht_for_word,distinct_station_data)
+
+  if(!is.null(ht_notes)){
+    ht_for_word <- ht_for_word %>% add_footnote(ht_notes)}
+
+  ht_for_word <- ht_for_word %>% set_caption(sprintf('Analytical results for %s',station))
+  return(ht_for_word)
+
+}
